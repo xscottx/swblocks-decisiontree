@@ -38,7 +38,7 @@ logger.lifecycle('group {}, version {}', project.group, project.version)
 
 ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
 
-apply plugin: 'jacoco'
+// apply plugin: 'jacoco'
 apply plugin: 'maven-publish'
 defaultTasks 'clean', 'build', 'publishToMavenLocal'
 
@@ -81,9 +81,9 @@ def projectPom = {
 
 allprojects {
     apply plugin: 'java'
-    apply plugin: 'checkstyle'
+    // apply plugin: 'checkstyle'
     apply plugin: 'signing'
-    apply plugin: 'jacoco'
+    // apply plugin: 'jacoco'
     apply plugin: 'maven-publish'
 
     repositories {
@@ -111,10 +111,10 @@ allprojects {
 
     [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
-    checkstyle {
-        toolVersion = '6.14.1'
-        configFile = new File(rootDir, 'config/checkstyle/jbl_checks.xml')
-    }
+    // checkstyle {
+    //     toolVersion = '6.14.1'
+    //     configFile = new File(rootDir, 'config/checkstyle/jbl_checks.xml')
+    // }
 
     tasks.withType(Test) {
         testLogging {
@@ -140,7 +140,7 @@ allprojects {
     }
 
     dependencies {
-        checkstyle 'com.puppycrawl.tools:checkstyle:7.3'
+        // checkstyle 'com.puppycrawl.tools:checkstyle:7.3'
 
         compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
 
@@ -158,30 +158,22 @@ allprojects {
                 'com.google.code.tempus-fugit:tempus-fugit:1.1')
     }
 
-    jacoco {
-        toolVersion = '0.7.6.201602180812'
-    }
+    // jacoco {
+    //     toolVersion = '0.7.6.201602180812'
+    // }
 
-    jacocoTestReport() {
-        dependsOn(project: test)
-        reports {
-            html.enabled true
-            xml.enabled true
-            csv.enabled false
-        }
-    }
+    // jacocoTestReport() {
+    //     dependsOn(project: test)
+    //     reports {
+    //         html.enabled true
+    //         xml.enabled true
+    //         csv.enabled false
+    //     }
+    // }
 
     javadoc {
         title = '<h1>DecisionTree</h1>'
     }
-
-    task integrationTest(type: Test) {
-        testClassesDir = sourceSets.integrationTest.output.classesDir
-        classpath = sourceSets.integrationTest.runtimeClasspath
-        outputs.upToDateWhen { false }
-    }
-
-    integrationTest.mustRunAfter test
 
     task sourcesJar(type: Jar) {
         classifier = 'sources'
@@ -301,22 +293,22 @@ project('examples') {
     }
 }
 
-task jacocoRootReport(type: JacocoReport, group: 'Coverage reports') {
-    description = 'Generates an aggregate report from all subprojects'
-    dependsOn(subprojects.jacocoTestReport)
+// task jacocoRootReport(type: JacocoReport, group: 'Coverage reports') {
+//     description = 'Generates an aggregate report from all subprojects'
+//     dependsOn(subprojects.jacocoTestReport)
 
-    additionalSourceDirs = files(subprojects.sourceSets.main.allSource.srcDirs)
-    sourceDirectories = files(subprojects.sourceSets.main.allSource.srcDirs)
-    classDirectories = files(subprojects.sourceSets.main.output)
-    executionData = files(subprojects.jacocoTestReport.executionData)
+//     additionalSourceDirs = files(subprojects.sourceSets.main.allSource.srcDirs)
+//     sourceDirectories = files(subprojects.sourceSets.main.allSource.srcDirs)
+//     classDirectories = files(subprojects.sourceSets.main.output)
+//     executionData = files(subprojects.jacocoTestReport.executionData)
 
-    reports {
-        html.enabled = true
-        xml.enabled = true
-        csv.enabled = false
-    }
-    doFirst {
-        executionData = files(executionData.findAll { it.exists() })
-    }
-}
+//     reports {
+//         html.enabled = true
+//         xml.enabled = true
+//         csv.enabled = false
+//     }
+//     doFirst {
+//         executionData = files(executionData.findAll { it.exists() })
+//     }
+// }
 

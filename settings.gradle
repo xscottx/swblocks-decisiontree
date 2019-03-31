@@ -1,5 +1,8 @@
-pluginRepositories {
-    gradlePluginPortal()
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+
+    }
 }
 rootProject.name = 'DecisionTree'
 include 'core', 'persistence-cassandra', 'persistence-json-jackson', 'change', 'examples'

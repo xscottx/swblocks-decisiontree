@@ -25,6 +25,7 @@ import java.util.UUID;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
@@ -77,6 +78,7 @@ import static org.mockito.Mockito.when;
  */
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(CodecRegistry.class)
+@Ignore
 public class CassandraLoaderTest {
     private static final String RULE_SET_NAME = "ruleSetName";
     private static final Instant NOW = Instant.now();
